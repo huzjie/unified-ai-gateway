@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 讨论区
+    url: https://github.com/unified-ai-gateway/unified-ai-gateway/discussions
+    about: 提问与讨论请前往 Discussions

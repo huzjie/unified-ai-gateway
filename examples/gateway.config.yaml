@@ -1,0 +1,94 @@
+# Unified AI Gateway 配置文件示例
+# 可在 .env 之外补充 gateway.config.yaml/json 提供 Provider/路由/别名声明
+
+providers:
+  - name: moonshot-prod
+    type: moonshot
+    baseUrl: https://api.moonshot.cn/v1
+    apiKey: sk-moonshot-xxx
+    models:
+      - kimi-k3
+      - kimi-latest
+    pricing:
+      kimi-k3:
+        input: 4
+        output: 16
+    enabled: true
+
+  - name: deepseek-prod
+    type: deepseek
+    baseUrl: https://api.deepseek.com/v1
+    apiKey: sk-deepseek-xxx
+    models:
+      - deepseek-chat
+      - deepseek-reasoner
+    pricing:
+      deepseek-chat:
+        input: 1
+        output: 2
+    enabled: true
+
+  - name: openai-prod
+    type: openai
+    baseUrl: https://api.openai.com/v1
+    apiKey: sk-openai-xxx
+    models:
+      - gpt-4o
+    pricing:
+      gpt-4o:
+        input: 17.5
+        output: 70
+    enabled: true
+
+  - name: ollama-local
+    type: ollama
+    baseUrl: http://localhost:11434
+    models:
+      - llama3.1
+    enabled: true
+
+  - name: mock
+    type: mock
+    baseUrl: mock://local
+    models:
+      - mock-all
+    enabled: true
+
+aliases:
+  my-main:
+    - moonshot-prod
+    - deepseek-prod
+
+routeRules:
+  - name: default-chat
+    priority: 1
+    matchModel: my-main
+    strategy: priority
+    targets:
+      - moonshot-prod
+      - deepseek-prod
+    fallbackTargets:
+      - ollama-local
+    enabled: true
+
+  - name: cost-first
+    priority: 2
+    matchTenant: data
+    strategy: cost-first
+    targets:
+      - deepseek-prod
+      - moonshot-prod
+    enabled: true
+
+rateLimit:
+  globalQps: 1000
+  globalBurst: 2000
+  globalConcurrency: 200
+  algorithm: token-bucket
+  windowMs: 1000
+
+circuitBreaker:
+  failureThreshold: 0.5
+  minRequests: 10
+  openMs: 30000
+  halfOpenRatio: 0.5

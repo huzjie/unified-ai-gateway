@@ -1,0 +1,59 @@
+sequenceDiagram
+    autonumber
+    participant C as Client(业务侧)
+    participant F as Fastify Server
+    participant AK as ApiKeyAuth 中间件
+    participant RL as RateLimiter
+    participant RE as RouterEngine
+    participant CB as CircuitBreaker
+    participant PR as ProviderRegistry
+    participant UP as 上游 Provider
+    participant CC as CostCalculator
+    participant UL as UsageLogRepository
+    participant EB as EventBus
+
+    C->>F: POST /v1/chat/completions<br/>Authorization: Bearer sk-...
+    F->>AK: 校验 API Key
+    AK->>AK: SHA-256+salt 哈希明文 Key
+    AK->>UL: findByHash(hash)
+    UL-->>AK: ApiKeyEntity(tenant, whitelist, 状态)
+    alt Key 无效/吊销/过期/模型不在白名单
+        AK-->>F: AppError(UAG-2001/2002/2003)
+        F-->>C: 401/403 OpenAI 兼容错误
+    end
+    AK-->>F: RequestContext(tenant, key, virtualModel)
+    F->>RL: acquire(global + perKey + concurrency)
+    alt 限流超限
+        RL-->>F: denied(retryAfterMs)
+        F-->>C: 429 + Retry-After
+        F->>EB: publish(rate_limited)
+    end
+    F->>RE: resolve(ctx)  ← 虚拟模型别名解析 + 策略选择
+    RE-->>F: RouteDecision(provider='moonshot-prod', model='kimi-k3', candidates=[...])
+    loop 候选故障转移（最多 len(candidates) 次）
+        F->>CB: allow(providerKey)
+        alt 熔断 OPEN
+            CB-->>F: open(retryAfterMs)
+            F->>RE: nextCandidate(prev, reason='circuit_open')
+        else 熔断 CLOSED/HALF_OPEN
+            CB-->>F: allowed
+            F->>PR: get('moonshot-prod')
+            PR-->>F: ProviderAdapter
+            F->>UP: 适配器转换后的上游请求
+            alt 上游成功
+                UP-->>F: 响应(含 usage)
+                F->>CB: recordSuccess(providerKey)
+                F->>CC: calculate(usage, pricingTable)
+                CC-->>F: cost(微元)
+                F->>UL: insert(usageLog)
+                F->>UL: upsert(dailyStats)
+                F->>EB: publish(usage_recorded)
+                F-->>C: 200 OpenAI 兼容响应
+            else 上游失败/超时
+                UP-->>F: 5xx/超时/网络错误
+                F->>CB: recordFailure(providerKey, error)
+                F->>RE: nextCandidate(prev, reason='upstream_error')
+            end
+        end
+    end
+    Note over F,C: 所有候选均失败 → 502 + UAG-4002

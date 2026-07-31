@@ -1,0 +1,36 @@
+{
+  "name": "@uag/storage",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Unified AI Gateway 存储层（better-sqlite3 + 内存 fallback + 迁移）",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "jest --coverage=false",
+    "lint": "eslint src tests --ext .ts"
+  },
+  "dependencies": {
+    "@uag/types": "workspace:*",
+    "better-sqlite3": "^11.7.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.17.10",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.2"
+  }
+}

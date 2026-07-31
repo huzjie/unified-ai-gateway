@@ -1,0 +1,115 @@
+classDiagram
+    class ChatService {
+        +handleChat(ctx: RequestContext) Promise~ChatResponse~
+        +handleStream(ctx: RequestContext) AsyncIterable~SSEChunk~
+        -callProvider(decision: RouteDecision, body: unknown) Promise~ProviderChatResult~
+    }
+    class RequestContext {
+        +requestId: string
+        +apiKey: ApiKeyEntity
+        +tenant: string
+        +virtualModel: string
+        +payload: ChatRequest
+        +routeDecision: RouteDecision
+        +usage: Usage
+        +cost: CostAmount
+    }
+    class RouterEngine {
+        +resolve(ctx: RequestContext) RouteDecision
+        +nextCandidate(prev: RouteDecision, reason: FailReason) RouteDecision
+    }
+    class Strategy {
+        <<interface>>
+        +pick(candidates: Candidate[]): string
+    }
+    class PriorityStrategy
+    class FailoverStrategy
+    class CostFirstStrategy
+    class RandomStrategy
+    class RateLimiter {
+        <<interface>>
+        +check(scope: RateLimitScope, weight: number) RateLimitResult
+        +acquire(ctx: RequestContext) Promise~RateLimitResult~
+        +release(ctx: RequestContext) void
+    }
+    class TokenBucket
+    class FixedWindow
+    class SlidingWindow
+    class ConcurrencyLimiter
+    class CircuitBreaker {
+        <<interface>>
+        +allow(providerKey: string) BreakerDecision
+        +recordSuccess(providerKey: string) void
+        +recordFailure(providerKey: string, error: Error) void
+        +getState(providerKey: string) BreakerState
+    }
+    class StateMachine
+    class HalfOpenProbe
+    class CostCalculator {
+        +calculate(usage: Usage, pricing: PricingTable) CostAmount
+    }
+    class PricingTable {
+        +getPrice(model: string, role: TokenRole) Price
+    }
+    class ProviderAdapter {
+        <<interface>>
+        +chat(params: ProviderChatParams, opts: CallOptions) Promise~ProviderChatResult~
+        +chatStream(params: ProviderChatParams, opts: CallOptions) AsyncIterable~ProviderStreamEvent~
+        +listModels() Promise~ProviderModel[]~
+        +healthCheck() Promise~HealthStatus~
+    }
+    class OpenAiProvider
+    class MoonshotProvider
+    class DeepSeekProvider
+    class MiniMaxProvider
+    class AnthropicProvider
+    class OllamaProvider
+    class MockProvider
+    class ProviderRegistry {
+        +register(adapter: ProviderAdapter) void
+        +get(name: string) ProviderAdapter
+        +list(): ProviderAdapter[]
+    }
+    class ApiKeyRepository {
+        <<interface>>
+        +create(input: NewApiKey) Promise~ApiKeyEntity~
+        +findByHash(hash: string) Promise~ApiKeyEntity~
+        +revoke(id: string, at: string) Promise~void~
+    }
+    class UsageLogRepository {
+        <<interface>>
+        +insert(log: UsageLog) Promise~void~
+        +query(filter: LogFilter, page: Page) Promise~PageResult~UsageLog~~
+    }
+    class EventBus {
+        +publish(event: GatewayEvent) void
+        +subscribe(type: EventType, handler: Handler) void
+    }
+    ChatService --> RouterEngine : resolve/next
+    ChatService --> RateLimiter : check/acquire
+    ChatService --> CircuitBreaker : allow/record
+    ChatService --> CostCalculator : calculate
+    ChatService --> ProviderRegistry : get adapter
+    ChatService --> UsageLogRepository : insert
+    ChatService --> EventBus : publish usage
+    RouterEngine --> Strategy : 策略选择
+    PriorityStrategy --|> Strategy
+    FailoverStrategy --|> Strategy
+    CostFirstStrategy --|> Strategy
+    RandomStrategy --|> Strategy
+    TokenBucket ..|> RateLimiter
+    FixedWindow ..|> RateLimiter
+    SlidingWindow ..|> RateLimiter
+    ConcurrencyLimiter ..|> RateLimiter
+    CircuitBreaker --> StateMachine
+    CircuitBreaker --> HalfOpenProbe
+    OpenAiProvider ..|> ProviderAdapter
+    MoonshotProvider ..|> ProviderAdapter
+    DeepSeekProvider ..|> ProviderAdapter
+    MiniMaxProvider ..|> ProviderAdapter
+    AnthropicProvider ..|> ProviderAdapter
+    OllamaProvider ..|> ProviderAdapter
+    MockProvider ..|> ProviderAdapter
+    ProviderRegistry --> ProviderAdapter
+    UsageLogRepository --> ApiKeyRepository : 引用 key
+    CostCalculator --> PricingTable

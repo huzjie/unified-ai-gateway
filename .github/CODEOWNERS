@@ -1,0 +1,21 @@
+# 代码负责人
+
+* @unified-ai-gateway/maintainers
+
+# 核心引擎
+/packages/core/ @unified-ai-gateway/core-maintainers
+
+# 存储层
+/packages/storage/ @unified-ai-gateway/storage-maintainers
+
+# Provider 适配器
+/packages/providers/ @unified-ai-gateway/providers-maintainers
+
+# 网关服务
+/apps/gateway/ @unified-ai-gateway/gateway-maintainers
+
+# 前端控制台
+/apps/web/ @unified-ai-gateway/web-maintainers
+
+# 文档
+/docs/ @unified-ai-gateway/docs-maintainers

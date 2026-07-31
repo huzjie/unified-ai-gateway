@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+coverage
+data
+*.db
+*.log
+pnpm-lock.yaml
+package-lock.json

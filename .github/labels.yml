@@ -1,0 +1,28 @@
+# 仓库标签初始化
+name: 初始化仓库标签
+description: 创建标准 Issue/PR 标签
+labels:
+  - name: bug
+    color: d73a4a
+    description: 缺陷
+  - name: enhancement
+    color: a2eeef
+    description: 功能增强
+  - name: documentation
+    color: 0075ca
+    description: 文档
+  - name: dependencies
+    color: 0366d6
+    description: 依赖升级
+  - name: good-first-issue
+    color: 7057ff
+    description: 新手友好
+  - name: help-wanted
+    color: 008672
+    description: 需要帮助
+  - name: stale
+    color: ffffff
+    description: 过期
+  - name: security
+    color: b60205
+    description: 安全相关

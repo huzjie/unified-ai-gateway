@@ -1,0 +1,64 @@
+{
+  "name": "unified-ai-gateway",
+  "version": "1.0.0",
+  "private": true,
+  "description": "统一 AI 网关：一套 OpenAI 兼容接口对接多家大模型提供商，提供智能路由、限流熔断、成本追踪与用量分析",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "dev": "dotenv -e .env -- pnpm --filter @uag/gateway dev",
+    "dev:web": "pnpm --filter @uag/web dev",
+    "dev:cli": "pnpm --filter @uag/cli dev",
+    "build": "turbo run build",
+    "build:gateway": "pnpm --filter @uag/gateway build",
+    "build:web": "pnpm --filter @uag/web build",
+    "test": "turbo run test",
+    "test:core": "pnpm --filter @uag/core test",
+    "test:storage": "pnpm --filter @uag/storage test",
+    "test:providers": "pnpm --filter @uag/providers test",
+    "test:gateway": "pnpm --filter @uag/gateway test",
+    "test:cli": "pnpm --filter @uag/cli test",
+    "test:web": "pnpm --filter @uag/web test",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yaml,yml,css}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yaml,yml,css}\"",
+    "docker:up": "docker compose up -d --build",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.17.10",
+    "@typescript-eslint/eslint-plugin": "^8.19.1",
+    "@typescript-eslint/parser": "^8.19.1",
+    "cross-env": "^7.0.3",
+    "dotenv-cli": "^7.4.4",
+    "eslint": "^9.18.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "husky": "^9.1.7",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.3.0",
+    "pino-pretty": "^11.3.0",
+    "prettier": "^3.4.2",
+    "ts-jest": "^29.2.5",
+    "tsx": "^4.19.2",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yaml,yml,css}": [
+      "prettier --write"
+    ]
+  }
+}

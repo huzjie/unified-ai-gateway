@@ -1,0 +1,37 @@
+{
+  "name": "@uag/providers",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Unified AI Gateway Provider 适配器（openai/moonshot/deepseek/minimax/anthropic/ollama/mock）",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "jest --coverage=false",
+    "lint": "eslint src tests --ext .ts"
+  },
+  "dependencies": {
+    "@uag/core": "workspace:*",
+    "@uag/types": "workspace:*",
+    "undici": "^6.21.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.17.10",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.2"
+  }
+}

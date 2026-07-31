@@ -1,0 +1,17 @@
+node_modules
+dist
+build
+coverage
+.git
+.gitignore
+data
+*.db
+*.log
+.env
+.env.*
+docs
+benchmarks
+.github
+.vscode
+.idea
+.DS_Store

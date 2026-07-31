@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460">
+  <rect width="800" height="460" fill="#0f172a"/>
+  <text x="400" y="40" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">管理控制台 - 仪表盘</text>
+  <rect x="30" y="70" width="160" height="80" rx="8" fill="#1e293b" stroke="#1976d2"/>
+  <text x="110" y="105" font-size="12" fill="#94a3b8" text-anchor="middle">今日调用量</text>
+  <text x="110" y="130" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">128,430</text>
+  <rect x="210" y="70" width="160" height="80" rx="8" fill="#1e293b" stroke="#22c55e"/>
+  <text x="290" y="105" font-size="12" fill="#94a3b8" text-anchor="middle">今日成本</text>
+  <text x="290" y="130" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">¥ 326.40</text>
+  <rect x="390" y="70" width="160" height="80" rx="8" fill="#1e293b" stroke="#7c4dff"/>
+  <text x="470" y="105" font-size="12" fill="#94a3b8" text-anchor="middle">成功率</text>
+  <text x="470" y="130" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">99.2%</text>
+  <rect x="570" y="70" width="160" height="80" rx="8" fill="#1e293b" stroke="#f59e0b"/>
+  <text x="650" y="105" font-size="12" fill="#94a3b8" text-anchor="middle">平均延迟</text>
+  <text x="650" y="130" font-size="20" fill="#e2e8f0" text-anchor="middle" font-weight="bold">1.2s</text>
+  <rect x="30" y="180" width="480" height="180" rx="8" fill="#1e293b" stroke="#334155"/>
+  <text x="270" y="210" font-size="14" fill="#e2e8f0" text-anchor="middle">调用量趋势（按小时）</text>
+  <polyline points="70,300 150,280 230,290 310,240 390,220 470,200" fill="none" stroke="#1976d2" stroke-width="3"/>
+  <rect x="530" y="180" width="240" height="180" rx="8" fill="#1e293b" stroke="#334155"/>
+  <text x="650" y="210" font-size="14" fill="#e2e8f0" text-anchor="middle">模型占比</text>
+  <rect x="560" y="230" width="30" height="90" fill="#1976d2"/>
+  <rect x="610" y="255" width="30" height="65" fill="#7c4dff"/>
+  <rect x="660" y="275" width="30" height="45" fill="#22c55e"/>
+  <rect x="710" y="295" width="30" height="25" fill="#f59e0b"/>
+  <rect x="30" y="380" width="740" height="60" rx="8" fill="#1e293b" stroke="#334155"/>
+  <text x="400" y="405" font-size="13" fill="#e2e8f0" text-anchor="middle">成本 Top Key：kimi-k3 42% · deepseek-v4 31% · gpt-5.6 17% · 其他 10%</text>
+  <text x="400" y="425" font-size="11" fill="#94a3b8" text-anchor="middle">熔断: 0 · 限流: 12 · P95: 2.8s</text>
+</svg>

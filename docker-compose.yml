@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  gateway:
+    build:
+      context: .
+      target: gateway
+    container_name: uag-gateway
+    env_file:
+      - .env
+    environment:
+      - UAG_DATABASE_PATH=/app/data/gateway.db
+    ports:
+      - "${UAG_PORT:-8787}:8787"
+    volumes:
+      - uag-data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  web:
+    build:
+      context: .
+      target: web
+    container_name: uag-web
+    depends_on:
+      - gateway
+    ports:
+      - "5173:80"
+    restart: unless-stopped
+
+  # 可选：Redis 共享状态（P2 水平扩展）
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: uag-redis
+  #   ports:
+  #     - "6379:6379"
+  #   restart: unless-stopped
+
+volumes:
+  uag-data:
