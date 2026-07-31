@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@uag/types": "workspace:*",
-    "chalk": "^5.4.1",
+    "chalk": "^6.0.0",
     "cli-table3": "^0.6.5",
     "commander": "^12.1.0",
     "ora": "^8.1.1",
