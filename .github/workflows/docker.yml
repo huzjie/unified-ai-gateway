@@ -27,7 +27,7 @@ jobs:
             type=semver,pattern={{version}}
             type=sha
       - name: Build and push gateway
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           target: gateway
@@ -36,7 +36,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: Build and push web
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           target: web
