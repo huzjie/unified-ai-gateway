@@ -1,10 +1,32 @@
 # Unified AI Gateway（统一 AI 网关）
 
+[![CI](https://img.shields.io/github/actions/workflow/status/huzjie/unified-ai-gateway/ci.yml?branch=main)](https://github.com/huzjie/unified-ai-gateway/actions)
+[![TypeScript](https://img.shields.io/badge/lang-TypeScript-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![License](https://img.shields.io/badge/License-Apache--2.0-green)](https://github.com/huzjie/unified-ai-gateway/blob/main/LICENSE)
+[![Stars](https://img.shields.io/github/stars/huzjie/unified-ai-gateway?style=social)](https://github.com/huzjie/unified-ai-gateway)
+[![Last Commit](https://img.shields.io/github/last-commit/huzjie/unified-ai-gateway)](https://github.com/huzjie/unified-ai-gateway/commits/main)
+
 一个可自托管的统一 LLM API 网关：用一套 **OpenAI 兼容接口**对接多家大模型提供商，提供**智能路由、负载均衡、限流熔断、成本追踪与用量分析**。
 
 > 多模型时代的基础设施：Kimi K3 / DeepSeek V4 / GPT-5.6 / Claude / MiniMax / Ollama 一个网关全搞定，切换供应商业务代码零改动。
 
 ![架构](docs/images/architecture.svg)
+
+## 🆚 与同类 LLM 网关对比（为什么选 Unified AI Gateway）
+
+| 维度 | **Unified AI Gateway** | [LiteLLM](https://github.com/BerriAI/litellm) | New API / One API | [Portkey](https://github.com/Portkey-AI/gateway) |
+|---|---|---|---|---|
+| 技术栈 | TypeScript 全栈（Fastify + React 19） | Python | Go / TS | SaaS + SDK |
+| 自托管零运维 | ✅ SQLite 内置，单进程即起 | 需 Redis / 外部 DB | 需 DB | 偏托管 |
+| 管理控制台 | ✅ 内置 React 控制台 + CLI | LiteLLM UI | 有 | 有（偏云） |
+| 成本追踪 | ✅ 整数微元精确计费（1 元 = 1e6 微元） | 有（spend） | 有 | 有 |
+| 路由 / 熔断 | 4 策略 + 熔断状态机 + 半开探测 | 有 | 有 | fallback / loadbalance |
+| 国产模型 | ✅ Kimi / DeepSeek / MiniMax 一等公民 | 多 | 多 | 多 |
+| 定位 | 轻量、开箱即用、国产友好 | 大而全、生态最强 | 社区流行 | 企业网关 / 可观测 |
+
+> 诚实定位：LiteLLM 的 Provider 覆盖与生态最广；UAG 的优势在 **TS 原生、SQLite 零外部依赖、国产大模型一等公民、内置精致控制台与 CLI**，适合想要"十分钟自托管、不被云绑定"的团队。
+
+
 
 ## 功能特性
 
