@@ -8,11 +8,17 @@ on:
   schedule:
     - cron: '0 3 * * 1'
 
+# P0-3 / OpenSSF Scorecard "Token-Permissions": least privilege at top level.
+permissions:
+  contents: read
+
 jobs:
   analyze:
     runs-on: ubuntu-latest
     permissions:
       security-events: write
+      actions: read
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - name: Initialize CodeQL
