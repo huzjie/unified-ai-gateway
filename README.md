@@ -15,17 +15,19 @@
 
 ## 🆚 与同类 LLM 网关对比（为什么选 Unified AI Gateway）
 
-| 维度 | **Unified AI Gateway** | [LiteLLM](https://github.com/BerriAI/litellm) | New API / One API | [Portkey](https://github.com/Portkey-AI/gateway) |
-|---|---|---|---|---|
-| 技术栈 | TypeScript 全栈（Fastify + React 19） | Python | Go / TS | SaaS + SDK |
-| 自托管零运维 | ✅ SQLite 内置，单进程即起 | 需 Redis / 外部 DB | 需 DB | 偏托管 |
-| 管理控制台 | ✅ 内置 React 控制台 + CLI | LiteLLM UI | 有 | 有（偏云） |
-| 成本追踪 | ✅ 整数微元精确计费（1 元 = 1e6 微元） | 有（spend） | 有 | 有 |
-| 路由 / 熔断 | 4 策略 + 熔断状态机 + 半开探测 | 有 | 有 | fallback / loadbalance |
-| 国产模型 | ✅ Kimi / DeepSeek / MiniMax 一等公民 | 多 | 多 | 多 |
-| 定位 | 轻量、开箱即用、国产友好 | 大而全、生态最强 | 社区流行 | 企业网关 / 可观测 |
+> Star 数据为 2026-08-06 实测快照（api.github.com）；OpenRouter 为商业 API 服务，无开源仓库可计 star。
 
-> 诚实定位：LiteLLM 的 Provider 覆盖与生态最广；UAG 的优势在 **TS 原生、SQLite 零外部依赖、国产大模型一等公民、内置精致控制台与 CLI**，适合想要"十分钟自托管、不被云绑定"的团队。
+| 维度 | **Unified AI Gateway** | [OmniRoute](https://github.com/diegosouzapw/OmniRoute) ★40.8k | [LiteLLM](https://github.com/BerriAI/litellm) ★55.7k | [OpenRouter](https://openrouter.ai) | New API / One API ★44.4k / ★36.2k |
+|---|---|---|---|---|---|
+| 技术栈 | TypeScript 全栈（Fastify + React 19） | TypeScript | Python（Rust core + Python SDK） | 商业 API 服务 | Go / JS |
+| 自托管零运维 | ✅ SQLite 内置，单进程即起 | 需外部依赖 | 需 Redis / 外部 DB | ❌ 托管服务 | 需 DB |
+| 管理控制台 | ✅ 内置 React 控制台 + CLI | 有 | LiteLLM UI | 有（云控制台） | 有 |
+| 成本追踪 | ✅ 整数微元精确计费（1 元 = 1e6 微元） | 有 | 有（spend） | 有（账单） | 有 |
+| 路由 / 熔断 | 4 策略 + 熔断状态机 + 半开探测 | 有 | 有 | 有 | 有 |
+| 国产模型 | ✅ Kimi / DeepSeek / MiniMax 一等公民 | 多 | 多 | 有 | 多 |
+| 定位 | 轻量、开箱即用、国产友好 | 免费 MIT 网关、Provider 覆盖广 | 大而全、生态最强 | 商业聚合 + 计费 | 社区流行 |
+
+> 诚实定位：LiteLLM / OmniRoute 的 Provider 覆盖与生态更广；UAG 的优势在 **TS 原生、SQLite 零外部依赖、国产大模型一等公民、内置精致控制台与 CLI**，适合想要"十分钟自托管、不被云绑定"的团队。
 
 
 
