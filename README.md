@@ -193,3 +193,8 @@ A: `UAG_ADMIN_PASSWORD`、`UAG_JWT_SECRET`、`UAG_PROVIDER_KEY_ENCRYPTION_KEY`�
 ## License
 
 Apache-2.0
+---
+
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=huzjie/unified-ai-gateway&type=Date)](https://star-history.com/#huzjie/unified-ai-gateway&Date)
