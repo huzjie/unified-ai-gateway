@@ -4,9 +4,17 @@ on:
   schedule:
     - cron: '0 0 * * *'
 
+# P0-3 / OpenSSF Scorecard "Token-Permissions": least privilege at top level.
+permissions:
+  contents: read
+
 jobs:
   stale:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
     steps:
       - uses: actions/stale@v9
         with:
