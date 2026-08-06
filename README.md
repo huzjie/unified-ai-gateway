@@ -5,6 +5,7 @@
 [![License](https://img.shields.io/badge/License-Apache--2.0-green)](https://github.com/huzjie/unified-ai-gateway/blob/main/LICENSE)
 [![Stars](https://img.shields.io/github/stars/huzjie/unified-ai-gateway?style=social)](https://github.com/huzjie/unified-ai-gateway)
 [![Last Commit](https://img.shields.io/github/last-commit/huzjie/unified-ai-gateway)](https://github.com/huzjie/unified-ai-gateway/commits/main)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/huzjie/unified-ai-gateway/badge)](https://scorecard.dev/viewer/?uri=github.com/huzjie/unified-ai-gateway)
 
 一个可自托管的统一 LLM API 网关：用一套 **OpenAI 兼容接口**对接多家大模型提供商，提供**智能路由、负载均衡、限流熔断、成本追踪与用量分析**。
 
