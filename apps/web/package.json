@@ -22,7 +22,7 @@
     "dayjs": "^1.11.13",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-hook-form": "^7.54.2",
+    "react-hook-form": "^7.85.0",
     "react-router-dom": "^7.1.1",
     "recharts": "^2.15.0",
     "zustand": "^5.0.3"
@@ -37,7 +37,7 @@
     "autoprefixer": "^10.4.20",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "postcss": "^8.4.49",
+    "postcss": "^8.5.26",
     "tailwindcss": "^3.4.17",
     "ts-jest": "^29.2.5",
     "typescript": "^5.7.2",
