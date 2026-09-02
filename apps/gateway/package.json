@@ -25,7 +25,7 @@
     "@uag/providers": "workspace:*",
     "@uag/storage": "workspace:*",
     "@uag/types": "workspace:*",
-    "fastify": "^5.2.1",
+    "fastify": "^5.12.1",
     "pino": "^9.5.0",
     "zod": "^3.24.1"
   },
